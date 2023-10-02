@@ -7,6 +7,7 @@ public class Car : MonoBehaviour
 {
     [Header("Stats")]
     [SerializeField] protected float speed;
+    protected Vector3 direction;
 
     [Header("AI")] 
     [SerializeField] protected LayerMask carLayer;
@@ -17,8 +18,11 @@ public class Car : MonoBehaviour
     [SerializeField] protected AudioClip movingSound;
     [SerializeField] protected AudioClip crashSound;
 
-    protected virtual Vector2 GetDirection() => Vector2.right;
-    
+    protected virtual void SetDirection()
+    {
+        direction = Vector3.right;
+    }
+
     protected virtual float GetSpeed()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position+transform.right*minDistance, transform.right, maxDistanceCheck, carLayer);
@@ -32,7 +36,7 @@ public class Car : MonoBehaviour
 
     private void Move()
     {
-        Vector3 direction = GetDirection();
+        SetDirection();
         transform.right = Vector3.Lerp(transform.right, direction, Time.deltaTime * 10);    
         transform.position += direction * (GetSpeed() * Time.deltaTime);
     }
@@ -47,7 +51,7 @@ public class Car : MonoBehaviour
         Move();
     }
     
-    protected void OnDrawGizmosSelected()
+    protected virtual void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawLine(transform.position+transform.right*minDistance, transform.position+transform.right*maxDistanceCheck);
