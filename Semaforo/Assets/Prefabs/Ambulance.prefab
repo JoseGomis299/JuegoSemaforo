@@ -58,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9095737926133346367, guid: 4637cb0f2aec8e54e989f197e5288019, type: 3}
       propertyPath: m_Name
-      value: Ambulance Variant
+      value: Ambulance
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6950788096024518286, guid: 4637cb0f2aec8e54e989f197e5288019, type: 3}

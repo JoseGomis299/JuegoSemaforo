@@ -8,6 +8,7 @@ public class Car : MonoBehaviour
     [Header("Stats")]
     [SerializeField] protected float speed;
     protected Vector3 direction;
+    public Bounds Bounds { get; set; }
 
     [Header("AI")] 
     [SerializeField] protected LayerMask carLayer;
@@ -25,7 +26,7 @@ public class Car : MonoBehaviour
 
     protected virtual float GetSpeed()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position+transform.right*minDistance, transform.right, maxDistanceCheck, carLayer);
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position, Bounds.size, 0, transform.right, minDistance+Bounds.extents.x, carLayer);
         if (hit)
         {
             return speed * (hit.distance / maxDistanceCheck);
@@ -43,7 +44,8 @@ public class Car : MonoBehaviour
 
     protected void Start()
     {
-        minDistance += GetComponent<SpriteRenderer>().bounds.extents.x;
+        Bounds = GetComponent<SpriteRenderer>().bounds;
+        minDistance += Bounds.extents.x;
     }
     
     protected void Update()
@@ -54,6 +56,6 @@ public class Car : MonoBehaviour
     protected virtual void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position+transform.right*minDistance, transform.position+transform.right*maxDistanceCheck);
+        Gizmos.DrawWireCube(transform.position + transform.right*(minDistance+Bounds.extents.x), Bounds.size);
     }
 }
