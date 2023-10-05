@@ -17,12 +17,14 @@ public class DrunkCar : Car
     private float _amplitude;
 
     private int _piCount;
+    private float _lag;
 
     private void OnEnable()
     {
        SetDirection();
         _amplitude = amplitude * Random.Range(1f, 1.25f);
         _frequency = 2 * Mathf.PI * frequency * Random.Range(0.75f, 1.25f);
+        _lag = Random.Range(0, Mathf.PI);
     }
 
     protected override void SetDirection()
@@ -45,6 +47,6 @@ public class DrunkCar : Car
             _frequency = 2 * Mathf.PI * frequency * Random.Range(0.8f, 1.5f);
         }
         
-        return _amplitude * Mathf.Cos(Time.time * _frequency);
+        return _amplitude * Mathf.Cos(_lag+Time.time * _frequency);
     }
 }

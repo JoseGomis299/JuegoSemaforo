@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using ProjectUtils.ObjectPooling;
 using Unity.Mathematics;
 using UnityEngine;
@@ -10,7 +11,7 @@ public class CarSpawner : MonoBehaviour
 {
     [Header("Prefabs")]
     [SerializeField]
-    private GameObject[] cars;
+    private RandomObject[] cars;
 
     [Header("Spawner config")] 
     [SerializeField]
@@ -18,6 +19,14 @@ public class CarSpawner : MonoBehaviour
     private float _lastSpawn;
 
     private Vector2 _range;
+    
+    [Serializable]
+    private struct RandomObject
+    {
+        public float probability;
+        public GameObject prefab;
+    }
+    
     private void Start()
     {
         _range = new Vector2(transform.GetChild(0).position.y, transform.GetChild(1).position.y);
@@ -37,23 +46,28 @@ public class CarSpawner : MonoBehaviour
     {
         Vector3 spawnPos;
         Collider2D collider;
-        int carIndex = SelectCar();
-        Car car = cars[carIndex].GetComponent<Car>();
+        GameObject car = SelectCar();
+        Car carScript = car.GetComponent<Car>();
         
         do
         {
             spawnPos = new Vector3(transform.position.x, Random.Range(_range.x, _range.y));
-            collider = Physics2D.OverlapBox(spawnPos, car.Bounds.size, 0);
+            collider = Physics2D.OverlapBox(spawnPos, carScript.Bounds.size, 0);
         } while (collider != null && collider.TryGetComponent(out Car _));
 
-        ObjectPool.Instance.InstantiateFromPool(cars[carIndex].gameObject, spawnPos, quaternion.identity);
+        ObjectPool.Instance.InstantiateFromPool(car, spawnPos, quaternion.identity);
     }
 
-    private int SelectCar()
+    private GameObject SelectCar()
     {
         float n = Random.value;
-        if (n > 0.85) return 3;
-        if (n > 0.7) return 2;
-        return n > 0.4 ? 1 : 0;
+        float value = 1;
+        
+        for (int i = 0; i < cars.Length-1; i++)
+        {
+            value -= cars[i].probability;
+            if (n >= value) return cars[i].prefab;
+        }
+        return cars[^1].prefab;
     }
 }

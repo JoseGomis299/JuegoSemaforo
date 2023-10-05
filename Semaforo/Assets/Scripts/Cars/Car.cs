@@ -52,6 +52,11 @@ public class Car : MonoBehaviour
     {
         Move();
     }
+
+    protected void OnTriggerEnter2D(Collider2D col)
+    {
+        if(col.CompareTag("KillZone")) gameObject.SetActive(false);   
+    }
     
     protected virtual void OnDrawGizmosSelected()
     {

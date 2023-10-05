@@ -18,7 +18,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 691634112896598160, guid: 4637cb0f2aec8e54e989f197e5288019, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.6868052
+      value: 1.3393738
       objectReference: {fileID: 0}
     - target: {fileID: 691634112896598160, guid: 4637cb0f2aec8e54e989f197e5288019, type: 3}
       propertyPath: m_LocalPosition.z
@@ -51,6 +51,18 @@ PrefabInstance:
     - target: {fileID: 691634112896598160, guid: 4637cb0f2aec8e54e989f197e5288019, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7652450248971177618, guid: 4637cb0f2aec8e54e989f197e5288019, type: 3}
+      propertyPath: m_Color.b
+      value: 0.1585283
+      objectReference: {fileID: 0}
+    - target: {fileID: 7652450248971177618, guid: 4637cb0f2aec8e54e989f197e5288019, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7652450248971177618, guid: 4637cb0f2aec8e54e989f197e5288019, type: 3}
+      propertyPath: m_Color.r
+      value: 0.097899675
       objectReference: {fileID: 0}
     - target: {fileID: 9095737926133346367, guid: 4637cb0f2aec8e54e989f197e5288019, type: 3}
       propertyPath: m_Name
@@ -87,7 +99,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   maxDistanceCheck: 2
-  minDistance: 0.2
+  minDistance: 0
   movingSound: {fileID: 0}
   crashSound: {fileID: 0}
   streetLayer:
