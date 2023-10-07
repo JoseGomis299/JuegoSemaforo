@@ -17,6 +17,7 @@ public class CarSpawner : MonoBehaviour
     [SerializeField]
     private float spawnRate;
     private float _lastSpawn;
+    [SerializeField] private Transform[] spawnPoints;
 
     private Vector2 _range;
     
@@ -44,18 +45,8 @@ public class CarSpawner : MonoBehaviour
 
     private void SpawnCar()
     {
-        Vector3 spawnPos;
-        Collider2D collider;
         GameObject car = SelectCar();
-        Car carScript = car.GetComponent<Car>();
-        
-        do
-        {
-            spawnPos = new Vector3(transform.position.x, Random.Range(_range.x, _range.y));
-            collider = Physics2D.OverlapBox(spawnPos, carScript.Bounds.size, 0);
-        } while (collider != null && collider.TryGetComponent(out Car _));
-
-        ObjectPool.Instance.InstantiateFromPool(car, spawnPos, quaternion.identity);
+        ObjectPool.Instance.InstantiateFromPool(car, GetSpawnPos(), quaternion.identity);
     }
 
     private GameObject SelectCar()
@@ -69,5 +60,10 @@ public class CarSpawner : MonoBehaviour
             if (n >= value) return cars[i].prefab;
         }
         return cars[^1].prefab;
+    }
+
+    private Vector3 GetSpawnPos(bool usePoints = false)
+    {
+        return usePoints ? spawnPoints[Random.Range(0, spawnPoints.Length)].position : new Vector3(transform.position.x, Random.Range(_range.x, _range.y));
     }
 }

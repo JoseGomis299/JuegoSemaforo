@@ -586,7 +586,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &961891942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1491,6 +1491,7 @@ MonoBehaviour:
   - probability: 0.15
     prefab: {fileID: 7213862180057536528, guid: 457e5a17b9109b04bb31fda82b01efcf, type: 3}
   spawnRate: 0.5
+  spawnPoints: []
 --- !u!4 &1802876171
 Transform:
   m_ObjectHideFlags: 0

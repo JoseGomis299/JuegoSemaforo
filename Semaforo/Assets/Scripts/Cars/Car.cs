@@ -29,7 +29,7 @@ public class Car : MonoBehaviour
         RaycastHit2D hit = Physics2D.BoxCast(transform.position, Bounds.size, 0, transform.right, minDistance+Bounds.extents.x, carLayer);
         if (hit)
         {
-            return speed * (hit.distance / maxDistanceCheck);
+            return speed * (hit.distance / Bounds.size.x);
         }
         
         return speed;
