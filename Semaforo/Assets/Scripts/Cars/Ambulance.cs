@@ -20,7 +20,7 @@ public class Ambulance : Car
 
    protected override void SetDirection()
    {
-      RaycastHit2D hit = Physics2D.BoxCast(transform.position, Bounds.size, 0, Vector3.right, 0.5f+Bounds.extents.x, carLayer);
+      RaycastHit2D hit = Physics2D.BoxCast(transform.position, Bounds.size/2, 0, Vector3.right, 0.5f+Bounds.extents.x, carLayer);
       direction = Vector3.Lerp(direction, hit ? GetAvoidDirection() : Vector3.right, Time.deltaTime/0.05f);
       direction.Normalize();
    }

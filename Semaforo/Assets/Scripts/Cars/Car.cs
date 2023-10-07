@@ -26,7 +26,7 @@ public class Car : MonoBehaviour
 
     protected virtual float GetSpeed()
     {
-        RaycastHit2D hit = Physics2D.BoxCast(transform.position, Bounds.size, 0, transform.right, minDistance+Bounds.extents.x, carLayer);
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position, Bounds.size/1.9f, 0, transform.right, minDistance+Bounds.extents.x, carLayer);
         if (hit)
         {
             return speed * (hit.distance / Bounds.size.x);
@@ -38,7 +38,7 @@ public class Car : MonoBehaviour
     private void Move()
     {
         SetDirection();
-        transform.right = Vector3.Lerp(transform.right, direction, Time.deltaTime * 10);    
+        transform.right = Vector3.Lerp(transform.right, direction, direction == Vector3.right ? Time.deltaTime *10 : Time.deltaTime * 4);    
         transform.position += direction * (GetSpeed() * Time.deltaTime);
     }
 

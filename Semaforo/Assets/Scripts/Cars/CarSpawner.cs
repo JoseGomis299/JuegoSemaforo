@@ -46,7 +46,7 @@ public class CarSpawner : MonoBehaviour
     private void SpawnCar()
     {
         GameObject car = SelectCar();
-        ObjectPool.Instance.InstantiateFromPool(car, GetSpawnPos(), quaternion.identity);
+        ObjectPool.Instance.InstantiateFromPool(car, GetSpawnPos(true), quaternion.identity);
     }
 
     private GameObject SelectCar()
