@@ -5,9 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class MenuInicial : MonoBehaviour
 {
+    public GameObject menu;
+    static bool menuactive=true;
     public void Jugar()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        menuactive=false; 
+    }
+    private void Start()
+    {
+        if (menuactive==false)
+        {
+            menu.SetActive(false);
+        }
     }
 
     public void Salir()
