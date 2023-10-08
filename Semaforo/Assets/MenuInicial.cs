@@ -7,6 +7,7 @@ public class MenuInicial : MonoBehaviour
 {
     public GameObject menu;
     static bool menuactive=true;
+    public GameObject pausa;
     public void Jugar()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -24,6 +25,19 @@ public class MenuInicial : MonoBehaviour
     {
         Debug.Log("Salir...");
         Application.Quit();
+    }
+    private void Update()
+    {
+        Pausa();
+    }
+    public void Pausa()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape)&&!menuactive) 
+        {
+            Time.timeScale = 1f - Time.timeScale;
+            pausa.SetActive(!pausa.activeInHierarchy);
+        
+        }
     }
 }
 
