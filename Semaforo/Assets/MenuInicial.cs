@@ -6,16 +6,16 @@ using UnityEngine.SceneManagement;
 public class MenuInicial : MonoBehaviour
 {
     public GameObject menu;
-    static bool menuactive=true;
+    static bool menuactive = true;
     public GameObject pausa;
     public void Jugar()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        menuactive=false; 
+        menuactive = false;
     }
     private void Start()
     {
-        if (menuactive==false)
+        if (menuactive == false)
         {
             menu.SetActive(false);
         }
@@ -32,11 +32,11 @@ public class MenuInicial : MonoBehaviour
     }
     public void Pausa()
     {
-        if(Input.GetKeyDown(KeyCode.Escape)&&!menuactive) 
+        if (Input.GetKeyDown(KeyCode.Escape) && !menuactive)
         {
             Time.timeScale = 1f - Time.timeScale;
             pausa.SetActive(!pausa.activeInHierarchy);
-        
+
         }
     }
 }
