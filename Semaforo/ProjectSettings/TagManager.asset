@@ -6,6 +6,7 @@ TagManager:
   tags:
   - KillZone
   - Car
+  - Tank
   layers:
   - Default
   - TransparentFX
