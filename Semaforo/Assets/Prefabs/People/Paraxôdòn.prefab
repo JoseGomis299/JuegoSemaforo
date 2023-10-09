@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6722631777907093340}
   - component: {fileID: 3894919772650517446}
   - component: {fileID: -3971153973425864189}
+  - component: {fileID: 8609336196158003697}
   m_Layer: 0
   m_Name: "Parax\xF4d\xF2n"
   m_TagString: Untagged
@@ -146,7 +147,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.1}
-    oldSize: {x: 0.8888889, y: 0.8888889}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 0.8888889, y: 0.8888889}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -210,3 +211,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 6
   character: 3
+  maxYPos: 6
+--- !u!114 &8609336196158003697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4522010327531072498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8313d5493f7dfa144b4859625e7fa875, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bloodStains:
+  - {fileID: 21300000, guid: 307fa290d9a09484baf290d891780b21, type: 3}
+  - {fileID: 21300000, guid: 356c87687ed494e4a894fda7abc49d10, type: 3}
+  - {fileID: 21300000, guid: 07dc25d4bfd857741bed1eeafbcacdb2, type: 3}
+  bloodParticle: {fileID: 945911069789517380, guid: 77b0c4daf2d22f840bffcf2c6a978317, type: 3}
+  bloodDeco: {fileID: 6868263528341148689, guid: eeef271a1b1309349a713ab0bfbc08b8, type: 3}

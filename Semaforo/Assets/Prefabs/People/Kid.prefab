@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8245611382732625046}
   - component: {fileID: 9155613574813441105}
   - component: {fileID: 5679663824313072076}
+  - component: {fileID: 8989357643462767079}
   m_Layer: 0
   m_Name: Kid
   m_TagString: Untagged
@@ -210,3 +211,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   character: 2
+  maxYPos: 6
+--- !u!114 &8989357643462767079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2978290670611418993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8313d5493f7dfa144b4859625e7fa875, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bloodStains:
+  - {fileID: 21300000, guid: 307fa290d9a09484baf290d891780b21, type: 3}
+  - {fileID: 21300000, guid: 356c87687ed494e4a894fda7abc49d10, type: 3}
+  - {fileID: 21300000, guid: 07dc25d4bfd857741bed1eeafbcacdb2, type: 3}
+  bloodParticle: {fileID: 945911069789517380, guid: 77b0c4daf2d22f840bffcf2c6a978317, type: 3}
+  bloodDeco: {fileID: 6868263528341148689, guid: eeef271a1b1309349a713ab0bfbc08b8, type: 3}

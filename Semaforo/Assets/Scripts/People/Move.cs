@@ -19,10 +19,12 @@ public class Move : MonoBehaviour
     [SerializeField] private float maxYPos = 6f;
 
     private Animator anim;
+    private BloodEffects blood;
 
     private void Start()
     {
         anim = GetComponent<Animator>();
+        blood = GetComponent<BloodEffects>();
     }
 
     private void Update()
@@ -63,6 +65,7 @@ public class Move : MonoBehaviour
 
     void Die()
     {
-        gameObject.SetActive(false);
+        blood.SpawnDeathEffects(transform.position);
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
     }
 }
