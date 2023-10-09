@@ -2453,6 +2453,7 @@ MonoBehaviour:
   - {fileID: 1069752546}
   - {fileID: 1079545241}
   - {fileID: 611719901}
+  maxMenuCars: 7
 --- !u!4 &1802876171
 Transform:
   m_ObjectHideFlags: 0

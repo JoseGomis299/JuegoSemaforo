@@ -162,6 +162,7 @@ MonoBehaviour:
     m_Bits: 64
   maxDistanceCheck: 2
   minDistance: 0
+  stopPos: 2.2
   movingSound: {fileID: 0}
   crashSound: {fileID: 0}
   streetLayer:

@@ -18,8 +18,10 @@ public class CarSpawner : MonoBehaviour
     private float spawnRate;
     private float _lastSpawn;
     [SerializeField] private Transform[] spawnPoints;
+    [SerializeField] private float maxMenuCars = 20f;
 
     private Vector2 _range;
+    private float carsSpawned = 0f;
     
     [Serializable]
     private struct RandomObject
@@ -36,8 +38,9 @@ public class CarSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (_lastSpawn + spawnRate < Time.time)
+        if (_lastSpawn + spawnRate < Time.time)// && (!MenuInicial.menuactive || carsSpawned < maxMenuCars))
         {
+            carsSpawned += 1;
             _lastSpawn = Time.time;
             SpawnCar();
         }

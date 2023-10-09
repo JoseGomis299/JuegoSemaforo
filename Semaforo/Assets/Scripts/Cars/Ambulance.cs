@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Ambulance : Car
@@ -43,6 +44,12 @@ public class Ambulance : Car
 
    private Vector3 GetAvoidDirection()
    {
+      /*if (MenuInicial.menuactive)
+      {
+         return Vector3.zero;
+      }*/
+      
+      
       // RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector3.up, Bounds.extents.x, streetLayer);
       // if(hit) return Vector3.down;
       // hit = Physics2D.Raycast(transform.position, Vector3.down, Bounds.extents.x, streetLayer);

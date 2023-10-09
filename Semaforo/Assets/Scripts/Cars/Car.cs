@@ -15,6 +15,7 @@ public class Car : MonoBehaviour
     [SerializeField] protected LayerMask carLayer;
     [SerializeField] protected float maxDistanceCheck = 2f;
     [SerializeField] protected float minDistance = 0.2f;
+    [SerializeField] protected float stopPos;
 
     [Header("Sounds")] 
     [SerializeField] protected AudioClip movingSound;
@@ -30,6 +31,17 @@ public class Car : MonoBehaviour
         RaycastHit2D hit = Physics2D.BoxCast(center, Bounds.size/2f, 0, transform.right, minDistance+Bounds.extents.x, carLayer);
         if (hit)
         {
+            /*if (MenuInicial.menuactive)
+            {
+                float newSpeed = speed * (hit.distance / (4 * Bounds.size.x));
+
+                if (newSpeed < 0.5f)
+                {
+                    newSpeed = 0f;
+                }
+
+                return newSpeed;
+            }*/
             return speed * (hit.distance / Bounds.size.x);
         }
         
@@ -41,6 +53,11 @@ public class Car : MonoBehaviour
         SetDirection();
         //transform.right = Vector3.Lerp(transform.right, direction, direction == Vector3.right ? Time.deltaTime *10 : Time.deltaTime * 4);    
         transform.position += direction * (GetSpeed() * Time.deltaTime);
+
+        /*if (MenuInicial.menuactive)
+        {
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, -Mathf.Infinity, stopPos), transform.position.y, 0);
+        }*/
     }
 
     protected void Start()

@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MenuInicial : MonoBehaviour
 {
     public GameObject menu;
-    static bool menuactive = true;
+    public static bool menuactive = true;
     public GameObject pausa;
     public void Jugar()
     {

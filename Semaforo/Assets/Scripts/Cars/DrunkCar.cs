@@ -29,6 +29,11 @@ public class DrunkCar : Car
 
     protected override void SetDirection()
     {
+        /*if (MenuInicial.menuactive)
+        {
+            return;
+        }*/
+        
         RaycastHit2D hit = Physics2D.Raycast(center, Vector3.up, 1, streetLayer);
         if(hit) direction = Vector2.Lerp(direction, Vector2.right + Vector2.down, Time.deltaTime / changeDirSmoothness);
         hit = Physics2D.Raycast(center, Vector3.down, 1, streetLayer);

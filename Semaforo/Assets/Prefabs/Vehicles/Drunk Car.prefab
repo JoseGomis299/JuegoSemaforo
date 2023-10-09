@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 691634112896598160, guid: 4637cb0f2aec8e54e989f197e5288019, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 691634112896598160, guid: 4637cb0f2aec8e54e989f197e5288019, type: 3}
       propertyPath: m_LocalPosition.z
@@ -133,6 +133,7 @@ MonoBehaviour:
     m_Bits: 64
   maxDistanceCheck: 2
   minDistance: 0
+  stopPos: 2.5
   movingSound: {fileID: 0}
   crashSound: {fileID: 0}
   streetLayer:
