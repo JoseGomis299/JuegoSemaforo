@@ -210,7 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.5
-  character: 1
+  character: 2
   maxYPos: 6
 --- !u!114 &1268580551107411815
 MonoBehaviour:

@@ -59,7 +59,7 @@ public class PeopleSpawner : MonoBehaviour
 
     private void CheckInput()
     {
-        if (!Input.anyKey) return;
+        if (!Input.anyKey || Time.timeScale == 0) return;
         
         foreach (PeopleInput person in people)
         {

@@ -6,8 +6,8 @@ using UnityEngine;
 enum Characters
 {
     Adult, 
-    Granny,
     Kid,
+    Granny,
     Paraxodon,
     Tank
 }
@@ -60,6 +60,9 @@ public class Move : MonoBehaviour
         if (transform.position.y > maxYPos)
         {
             gameObject.SetActive(false);
+
+            if (character <= Characters.Kid) MissionManager.instance.DoObjective((MissionType) character);
+            if(character == Characters.Granny) MissionManager.instance.DoObjective(MissionType.CrossOld);
         }
     }
 
@@ -67,5 +70,8 @@ public class Move : MonoBehaviour
     {
         blood.SpawnDeathEffects(transform.position);
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        
+        if(character == Characters.Tank) MissionManager.instance.DoObjective(MissionType.KillTank);
+        if(character == Characters.Paraxodon) MissionManager.instance.DoObjective(MissionType.KillParaxodon);
     }
 }

@@ -11,6 +11,8 @@ public class Ambulance : Car
 
    private float rayDist;
    private Transform lastHit;
+   
+   private Vector3 lastDir;
 
    private void OnEnable()
    {
@@ -40,7 +42,6 @@ public class Ambulance : Car
       direction = Vector3.Lerp(direction, hit ? GetAvoidDirection() : Vector3.right, Time.deltaTime*10);
    }
 
-   private Vector3 lastDir;
 
    private Vector3 GetAvoidDirection()
    {

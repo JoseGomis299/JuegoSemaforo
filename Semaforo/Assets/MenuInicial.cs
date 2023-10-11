@@ -8,22 +8,23 @@ public class MenuInicial : MonoBehaviour
     public GameObject menu;
     public static bool menuactive = true;
     public GameObject pausa;
+    public GameObject misiones;
     public void Jugar()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         menuactive = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     private void Start()
     {
         if (menuactive == false)
         {
             menu.SetActive(false);
+            misiones.SetActive(true);
         }
     }
 
     public void Salir()
     {
-        Debug.Log("Salir...");
         Application.Quit();
     }
     private void Update()
@@ -36,7 +37,6 @@ public class MenuInicial : MonoBehaviour
         {
             Time.timeScale = 1f - Time.timeScale;
             pausa.SetActive(!pausa.activeInHierarchy);
-
         }
     }
 }
