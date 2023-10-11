@@ -22,6 +22,7 @@ public class PeopleSpawner : MonoBehaviour
     private float SpawnCountdown = .5f;
 
     private float lastSpawn;
+    private float waitingTime;
 
     private Vector2 tankSpawnPos;
     private Vector2 leftLimitSpawnPos;
@@ -40,13 +41,17 @@ public class PeopleSpawner : MonoBehaviour
         leftLimitSpawnPos = leftLimitSpawn.position;
         rightLimitSpawnPos = rightLimitSpawn.position;
 
-        lastSpawn = float.MinValue;
+        lastSpawn = -SpawnCountdown;
     }
     
     
     void Update()
     {
-        if (lastSpawn + SpawnCountdown < Time.time)
+        if (Input.GetKeyDown(KeyCode.Space)) waitingTime = Time.time;
+        if(Input.GetKey(KeyCode.Space)) return;
+        if(Input.GetKeyUp(KeyCode.Space))  waitingTime = Time.time - waitingTime;
+
+        if (waitingTime + lastSpawn + SpawnCountdown < Time.time)
         {
             CheckInput();
         }
@@ -54,11 +59,14 @@ public class PeopleSpawner : MonoBehaviour
 
     private void CheckInput()
     {
+        if (!Input.anyKey) return;
+        
         foreach (PeopleInput person in people)
         {
             if (!Input.GetKeyDown(person.input)) continue;
             SpawnPerson(person.prefab);
             lastSpawn = Time.time;
+            waitingTime = 0;
         }
     }
 
