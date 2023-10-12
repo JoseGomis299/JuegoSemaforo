@@ -49,6 +49,7 @@ public class BloodEffects : MonoBehaviour
         
         GameObject bloodDecoObj = ObjectPool.Instance.InstantiateFromPool(bloodDeco, spawnPos, quaternion.identity);
         bloodDecoObj.GetComponent<SpriteRenderer>().sprite = spriteUse;
+        bloodDecoObj.GetComponentInChildren<SpriteRenderer>().sprite = spriteUse;
         
         sprite.enabled = true;
         gameObject.SetActive(false);
