@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ProjectUtils.ObjectPooling;
 using Unity.Mathematics;
+using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -18,10 +19,13 @@ public class CarSpawner : MonoBehaviour
     private float spawnRate;
     private float _lastSpawn;
     [SerializeField] private Transform[] spawnPoints;
-    [SerializeField] private float maxMenuCars = 20f;
+    [SerializeField] private int maxMenuCars = 20;
 
     private Vector2 _range;
-    private float carsSpawned = 0f;
+    private int carsSpawned = 0;
+    private Car[] menuCars;
+
+    private bool lastMenuActive;
     
     [Serializable]
     private struct RandomObject
@@ -34,23 +38,37 @@ public class CarSpawner : MonoBehaviour
     {
         _range = new Vector2(transform.GetChild(0).position.y, transform.GetChild(1).position.y);
         _lastSpawn = float.MinValue;
+
+        menuCars = new Car[maxMenuCars];
+        lastMenuActive = MenuInicial.menuactive;
     }
 
     private void Update()
     {
-        if (_lastSpawn + spawnRate < Time.time)// && (!MenuInicial.menuactive || carsSpawned < maxMenuCars))
+        if ((_lastSpawn + spawnRate < Time.time) && (!MenuInicial.menuactive || carsSpawned < maxMenuCars))
         {
             carsSpawned += 1;
             _lastSpawn = Time.time;
             SpawnCar();
+        }
+
+        if (lastMenuActive && !MenuInicial.menuactive)
+        {
+            SpeedCars();
+            lastMenuActive = false;
         }
     }
 
     private void SpawnCar()
     {
         GameObject car = SelectCar();
-        ObjectPool.Instance.InstantiateFromPool(car, GetSpawnPos(true), quaternion.identity);
-    }
+        GameObject spawnedCar = ObjectPool.Instance.InstantiateFromPool(car, GetSpawnPos(true), quaternion.identity);
+
+        if (MenuInicial.menuactive && carsSpawned <= maxMenuCars)
+        {
+            menuCars[carsSpawned - 1] = spawnedCar.GetComponent<Car>();
+        }
+    }  
 
     private GameObject SelectCar()
     {
@@ -68,5 +86,16 @@ public class CarSpawner : MonoBehaviour
     private Vector3 GetSpawnPos(bool usePoints = false)
     {
         return usePoints ? spawnPoints[Random.Range(0, spawnPoints.Length)].position : new Vector3(transform.position.x, Random.Range(_range.x, _range.y));
+    }
+
+    private void SpeedCars()
+    {
+        foreach (Car car in menuCars)
+        {
+            if (car)
+            {
+                car.isRush = true;
+            }
+        }
     }
 }

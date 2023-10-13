@@ -12,7 +12,9 @@ public class MenuInicial : MonoBehaviour
     public void Jugar()
     {
         menuactive = false;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        menu.SetActive(false);
+        misiones.SetActive(true);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     private void Start()
     {

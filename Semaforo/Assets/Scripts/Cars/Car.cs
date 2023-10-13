@@ -21,6 +21,8 @@ public class Car : MonoBehaviour
     [SerializeField] protected AudioClip movingSound;
     [SerializeField] protected AudioClip crashSound;
 
+    public bool isRush = false;
+
     protected virtual void SetDirection()
     {
         direction = Vector3.right;
@@ -28,12 +30,17 @@ public class Car : MonoBehaviour
 
     protected virtual float GetSpeed()
     {
+        if (isRush)
+        {
+            return 8f;
+        }
+        
         RaycastHit2D hit = Physics2D.BoxCast(center, Bounds.size/2f, 0, transform.right, minDistance+Bounds.extents.x, carLayer);
         if (hit)
         {
-            /*if (MenuInicial.menuactive)
+            if (MenuInicial.menuactive)
             {
-                float newSpeed = speed * (hit.distance / (4 * Bounds.size.x));
+                float newSpeed = speed * (hit.distance / (3 * Bounds.size.x));
 
                 if (newSpeed < 0.5f)
                 {
@@ -41,7 +48,7 @@ public class Car : MonoBehaviour
                 }
 
                 return newSpeed;
-            }*/
+            }
             return speed * (hit.distance / Bounds.size.x);
         }
         
@@ -54,10 +61,10 @@ public class Car : MonoBehaviour
         //transform.right = Vector3.Lerp(transform.right, direction, direction == Vector3.right ? Time.deltaTime *10 : Time.deltaTime * 4);    
         transform.position += direction * (GetSpeed() * Time.deltaTime);
 
-        /*if (MenuInicial.menuactive)
+        if (MenuInicial.menuactive)
         {
             transform.position = new Vector3(Mathf.Clamp(transform.position.x, -Mathf.Infinity, stopPos), transform.position.y, 0);
-        }*/
+        }
     }
 
     protected void Start()
@@ -74,7 +81,11 @@ public class Car : MonoBehaviour
 
     protected void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.CompareTag("KillZone")) gameObject.SetActive(false);   
+        if (col.CompareTag("KillZone"))
+        {
+            isRush = false;
+            gameObject.SetActive(false);
+        }   
     }
     
     protected virtual void OnDrawGizmosSelected()

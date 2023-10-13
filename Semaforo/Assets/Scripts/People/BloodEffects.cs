@@ -16,12 +16,14 @@ public class BloodEffects : MonoBehaviour
     private float startEffectTime;
 
     private SpriteRenderer sprite;
+    private BoxCollider2D collider;
 
     private Vector2 spawnPos = Vector2.zero;
 
     private void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
+        collider = GetComponent<BoxCollider2D>();
     }
 
     public void SpawnDeathEffects(Vector2 pos)
@@ -52,6 +54,7 @@ public class BloodEffects : MonoBehaviour
         bloodDecoObj.GetComponentInChildren<SpriteRenderer>().sprite = spriteUse;
         
         sprite.enabled = true;
+        collider.enabled = true;
         gameObject.SetActive(false);
         
     }

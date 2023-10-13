@@ -23,11 +23,39 @@ public class Ambulance : Car
 
    protected override float GetSpeed()
    {
+      if (isRush)
+      {
+         return 8f;
+      }
+      
+      RaycastHit2D hit = Physics2D.BoxCast(center, Bounds.size/2f, 0, transform.right, minDistance+Bounds.extents.x, carLayer);
+      if (hit)
+      {
+         if (MenuInicial.menuactive)
+         {
+            float newSpeed = speed * (hit.distance / (4 * Bounds.size.x));
+
+            if (newSpeed < 0.5f)
+            {
+               newSpeed = 0f;
+            }
+
+            return newSpeed;
+         }
+         return speed * (hit.distance / Bounds.size.x);
+      }
+      
       return speed;
    }
 
    protected override void SetDirection()
    {
+      if (isRush)
+      {
+         direction = new Vector3(1, 0, 0);
+         return;
+      }
+      
       RaycastHit2D hit = Physics2D.BoxCast(center, Bounds.size/1.5f, 0, Vector3.right, rayDist+Bounds.extents.x, carLayer);
       if (hit)
       {
@@ -45,10 +73,10 @@ public class Ambulance : Car
 
    private Vector3 GetAvoidDirection()
    {
-      /*if (MenuInicial.menuactive)
+      if (MenuInicial.menuactive || isRush)
       {
-         return Vector3.zero;
-      }*/
+         return new Vector3(1, 0, 0);
+      }
       
       
       // RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector3.up, Bounds.extents.x, streetLayer);

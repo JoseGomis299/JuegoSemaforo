@@ -64,6 +64,9 @@ public class PeopleSpawner : MonoBehaviour
         foreach (PeopleInput person in people)
         {
             if (!Input.GetKeyDown(person.input)) continue;
+
+            if (MenuInicial.menuactive && person.prefab.CompareTag("Tank")) continue;
+            
             SpawnPerson(person.prefab);
             lastSpawn = Time.time;
             waitingTime = 0;
