@@ -2773,7 +2773,7 @@ MonoBehaviour:
   tankSpawn: {fileID: 440470346}
   leftLimitSpawn: {fileID: 1625317493}
   rightLimitSpawn: {fileID: 766857730}
-  SpawnCountdown: 0.5
+  SpawnCountdown: 1
 --- !u!4 &1437582662
 Transform:
   m_ObjectHideFlags: 0
