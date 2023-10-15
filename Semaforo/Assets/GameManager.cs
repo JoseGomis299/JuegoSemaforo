@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
     public event Action onGameStart;
+    public event Action onBeginPlay;
 
     private void Awake()
     {
@@ -26,11 +27,16 @@ public class GameManager : MonoBehaviour
 
     public void Jugar()
     {
+
         menuactive = false;
         menu.SetActive(false);
         misiones.SetActive(true);
         onGameStart?.Invoke();
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        if (onBeginPlay != null)
+        {
+            onBeginPlay.Invoke();
+        }
     }
     
     private void Start()
