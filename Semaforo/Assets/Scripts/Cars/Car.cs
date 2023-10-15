@@ -38,7 +38,7 @@ public class Car : MonoBehaviour
         RaycastHit2D hit = Physics2D.BoxCast(center, Bounds.size/2f, 0, transform.right, minDistance+Bounds.extents.x, carLayer);
         if (hit)
         {
-            if (MenuInicial.menuactive)
+            if (GameManager.menuactive)
             {
                 float newSpeed = speed * (hit.distance / (3 * Bounds.size.x));
 
@@ -61,7 +61,7 @@ public class Car : MonoBehaviour
         //transform.right = Vector3.Lerp(transform.right, direction, direction == Vector3.right ? Time.deltaTime *10 : Time.deltaTime * 4);    
         transform.position += direction * (GetSpeed() * Time.deltaTime);
 
-        if (MenuInicial.menuactive)
+        if (GameManager.menuactive)
         {
             transform.position = new Vector3(Mathf.Clamp(transform.position.x, -Mathf.Infinity, stopPos), transform.position.y, 0);
         }

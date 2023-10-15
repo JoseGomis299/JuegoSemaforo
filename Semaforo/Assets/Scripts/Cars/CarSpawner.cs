@@ -40,19 +40,19 @@ public class CarSpawner : MonoBehaviour
         _lastSpawn = float.MinValue;
 
         menuCars = new Car[maxMenuCars];
-        lastMenuActive = MenuInicial.menuactive;
+        lastMenuActive = GameManager.menuactive;
     }
 
     private void Update()
     {
-        if ((_lastSpawn + spawnRate < Time.time) && (!MenuInicial.menuactive || carsSpawned < maxMenuCars))
+        if (_lastSpawn + spawnRate < Time.time && (!GameManager.menuactive || carsSpawned < maxMenuCars))
         {
             carsSpawned += 1;
             _lastSpawn = Time.time;
             SpawnCar();
         }
 
-        if (lastMenuActive && !MenuInicial.menuactive)
+        if (lastMenuActive && !GameManager.menuactive)
         {
             SpeedCars();
             lastMenuActive = false;
@@ -64,7 +64,7 @@ public class CarSpawner : MonoBehaviour
         GameObject car = SelectCar();
         GameObject spawnedCar = ObjectPool.Instance.InstantiateFromPool(car, GetSpawnPos(true), quaternion.identity);
 
-        if (MenuInicial.menuactive && carsSpawned <= maxMenuCars)
+        if (GameManager.menuactive && carsSpawned <= maxMenuCars)
         {
             menuCars[carsSpawned - 1] = spawnedCar.GetComponent<Car>();
         }

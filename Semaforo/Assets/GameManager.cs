@@ -1,27 +1,43 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MenuInicial : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     public GameObject menu;
     public static bool menuactive = true;
     public GameObject pausa;
     public GameObject misiones;
+
+    public static GameManager instance;
+    public event Action onGameStart;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else Destroy(gameObject);
+    }
+
     public void Jugar()
     {
         menuactive = false;
         menu.SetActive(false);
         misiones.SetActive(true);
+        onGameStart?.Invoke();
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+    
     private void Start()
     {
-        if (menuactive == false)
+        if (!menu.activeInHierarchy || menuactive == false)
         {
-            menu.SetActive(false);
-            misiones.SetActive(true);
+          Jugar();
         }
     }
 
@@ -33,6 +49,14 @@ public class MenuInicial : MonoBehaviour
     {
         Pausa();
     }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        pausa.SetActive(false);
+        Time.timeScale = 1;
+    }
+    
     public void Pausa()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && !menuactive)

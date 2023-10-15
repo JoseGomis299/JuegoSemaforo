@@ -14,6 +14,7 @@ public class MissionsUI : MonoBehaviour
     {
         MissionManager.instance.onObjectiveDone += RefreshUI;
         MissionManager.instance.onStartMission += SetUpMission;
+        gameObject.SetActive(false);
     }
 
     private void OnDestroy()
@@ -24,6 +25,11 @@ public class MissionsUI : MonoBehaviour
 
     private void SetUpMission(Mission mission)
     {
+        for (int i = 1; i < transform.childCount; i++)
+        {
+            Destroy(transform.GetChild(i).gameObject);
+        }
+        
         _texts = new Dictionary<MissionType, TMP_Text>();
         _objectives = mission.GetObjectives();
 
@@ -38,17 +44,21 @@ public class MissionsUI : MonoBehaviour
 
     private void RefreshUI(MissionObjective objective)
     {
-        _texts[objective.Type].text = GetText(objective);
+        if (objective != null && _texts.ContainsKey(objective.Type))
+        {
+            _texts[objective.Type].text = GetText(objective);
+        }
     }
-    
+
     private string GetText(MissionObjective objective)
-    {
-        string text = $"{objective.GetDoneQuantity()}/{objective.Needed} ";
-        if (objective.Type == MissionType.CrossKid) text += "kids crossed the street";
+    { 
+        string text = $"{objective.GetDoneQuantity()}/{objective.Needed} "; 
+        if (objective.Type == MissionType.CrossKid) text += "kids crossed the street"; 
         if (objective.Type == MissionType.CrossNormie) text += "men crossed the street";
-        if (objective.Type == MissionType.CrossOld) text += "grannies crossed the street";
-        if (objective.Type == MissionType.KillParaxodon) text += "Paradoxons killed";
+        if (objective.Type == MissionType.CrossOld) text += "grannies crossed the street"; 
+        if (objective.Type == MissionType.KillParaxodon) text += "Paraxodons killed";
         if (objective.Type == MissionType.KillTank) text += "tanks killed";
+        if(objective.IsCompleted) text = $"<s>{text}</s>";
         return text;
     }
 }

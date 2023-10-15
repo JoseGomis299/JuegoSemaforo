@@ -16,7 +16,7 @@ public class Move : MonoBehaviour
 {
     [SerializeField] float speed;
     [SerializeField] Characters character;
-    [SerializeField] private float maxYPos = 6f;
+    [SerializeField] private float maxYPos = 5f;
 
     private Animator anim;
     private BloodEffects blood;

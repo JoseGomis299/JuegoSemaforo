@@ -65,7 +65,7 @@ public class PeopleSpawner : MonoBehaviour
         {
             if (!Input.GetKeyDown(person.input)) continue;
 
-            if (MenuInicial.menuactive && person.prefab.CompareTag("Tank")) continue;
+            if (GameManager.menuactive && person.prefab.CompareTag("Tank")) continue;
             
             SpawnPerson(person.prefab);
             lastSpawn = Time.time;

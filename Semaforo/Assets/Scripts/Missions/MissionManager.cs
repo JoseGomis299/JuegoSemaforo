@@ -9,10 +9,17 @@ public class MissionManager : MonoBehaviour
     public event Action<Mission> onStartMission; 
     [SerializeField] private Mission currentMission;
     public static MissionManager instance;
+
+    [SerializeField] private int startingDifficulty;
+    private int _difficulty;
     
     private void Awake()
     {
-        if (instance == null) instance = this;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
         else
         {
             Destroy(gameObject);
@@ -21,22 +28,45 @@ public class MissionManager : MonoBehaviour
 
     private void Start()
     {
-        if (currentMission != null) StartCoroutine(startMission());
+        GameManager.instance.onGameStart += Initialize;
     }
 
+    private void OnDestroy()
+    {
+        GameManager.instance.onGameStart -= Initialize;
+    }
+
+    private void Initialize()
+    {
+        _difficulty = startingDifficulty;
+        currentMission = new Mission(_difficulty++);
+        
+        StartCoroutine(startMission());
+    }
+    
     IEnumerator startMission()
     {
         yield return null;
         StartMission(currentMission);
     }
 
-    public void StartMission(Mission mission)
+    public void EndedCurrentMission()
+    {
+        currentMission = new Mission(_difficulty++);
+        StartMission(currentMission);
+    }
+
+    private void StartMission(Mission mission)
     {
         onStartMission?.Invoke(mission);
     }
     
     public void DoObjective(MissionType type)
     {
-        onObjectiveDone?.Invoke(currentMission.ObjectiveDone(type));
+        Mission current = currentMission;
+        MissionObjective objective = currentMission.ObjectiveDone(type);
+        
+        //Check if we have not completed the current mission before updating visuals
+        if(current == currentMission) onObjectiveDone?.Invoke(objective);
     }
 }

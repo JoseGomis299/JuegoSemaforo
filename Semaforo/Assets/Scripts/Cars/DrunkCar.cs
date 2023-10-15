@@ -29,7 +29,7 @@ public class DrunkCar : Car
 
     protected override void SetDirection()
     {
-        if (MenuInicial.menuactive || isRush)
+        if (GameManager.menuactive || isRush)
         {
             direction = new Vector2(1, 0);
             return;

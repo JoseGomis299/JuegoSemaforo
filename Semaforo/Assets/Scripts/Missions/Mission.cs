@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [Serializable]
 public class Mission
@@ -10,8 +12,15 @@ public class Mission
     public Mission(int difficulty)
     {
         objectives = new List<MissionObjective>();
-        
-        //TODO
+
+        int n = difficulty;
+        for (int i = 0; i <= n; i++)
+        {
+            MissionType type = GetMissionType(difficulty);
+            MissionObjective objective = objectives.Find(x => x.Type == type);
+            if (objective == null) objectives.Add(new MissionObjective(type, 1));
+            else objective.AddToNeeded();
+        }
     }
 
     public MissionObjective ObjectiveDone(MissionType type)
@@ -19,14 +28,34 @@ public class Mission
         MissionObjective objective = objectives.Find(x => x.Type == type);
         if(objective == null) return null;
         
-        if(objective.CompleteObjective()) CompleteObjective(objective);
+        if(objective.CompleteObjective()) CompleteObjective();
         return objective;
     }
 
-    private void CompleteObjective(MissionObjective objective)
+    private void CompleteObjective()
     {
-        //TODO
+        if (objectives.All(x => x.IsCompleted))
+        {
+            MissionManager.instance.EndedCurrentMission();
+        }
     }
 
     public List<MissionObjective> GetObjectives() => objectives;
+    
+    private MissionType GetMissionType(int difficulty)
+    {
+        if (difficulty < 1) return 0;
+
+        float n = Random.value;
+        float value = 1;
+        float last = 0.5f;
+        
+        for (int i = 0; i < 5; i++)
+        {
+            value -= last;
+            if (n >= value) return (MissionType) i;
+            if(difficulty > i+1) last /= 2;
+        }
+        return 0;
+    }
 }

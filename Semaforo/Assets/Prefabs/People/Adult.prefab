@@ -211,7 +211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   character: 0
-  maxYPos: 6
+  maxYPos: 5
 --- !u!114 &6743827495520182663
 MonoBehaviour:
   m_ObjectHideFlags: 0

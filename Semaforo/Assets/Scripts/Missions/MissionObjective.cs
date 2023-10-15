@@ -9,11 +9,17 @@ public class MissionObjective
     [SerializeField] private int needed;
     public int Needed => needed;
     private int _count;
+    public bool IsCompleted => _count >= needed;
 
     public MissionObjective(MissionType type, int needed)
     {
         this.type = type;
         this.needed = needed;
+    }
+
+    public void AddToNeeded()
+    {
+        needed++;
     }
 
     public bool CompleteObjective(int value = 1)

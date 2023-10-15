@@ -31,7 +31,7 @@ public class Ambulance : Car
       RaycastHit2D hit = Physics2D.BoxCast(center, Bounds.size/2f, 0, transform.right, minDistance+Bounds.extents.x, carLayer);
       if (hit)
       {
-         if (MenuInicial.menuactive)
+         if (GameManager.menuactive)
          {
             float newSpeed = speed * (hit.distance / (4 * Bounds.size.x));
 
@@ -73,7 +73,7 @@ public class Ambulance : Car
 
    private Vector3 GetAvoidDirection()
    {
-      if (MenuInicial.menuactive || isRush)
+      if (GameManager.menuactive || isRush)
       {
          return new Vector3(1, 0, 0);
       }
