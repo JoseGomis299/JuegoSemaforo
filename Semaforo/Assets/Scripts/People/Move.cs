@@ -70,6 +70,7 @@ public class Move : MonoBehaviour
     {
         blood.SpawnDeathEffects(transform.position);
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
         
         if(character == Characters.Tank) MissionManager.instance.DoObjective(MissionType.KillTank);
         if(character == Characters.Paraxodon) MissionManager.instance.DoObjective(MissionType.KillParaxodon);
