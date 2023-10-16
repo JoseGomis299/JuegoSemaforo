@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         pausa.SetActive(false);
         Time.timeScale = 1;
+        Jugar();
     }
     
     public void Pausa()

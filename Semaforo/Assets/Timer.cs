@@ -23,22 +23,22 @@ public class TimeController : MonoBehaviour
         enmarcha = true;
     }
 
-    public void spawntimer()
+    public void spawntimer(Mission _)
     {
-        time.SetActive(true);  
+        time.SetActive(true);
+        restante = sec;
     }
 
 
     private void Start()
     {
-        GameManager.instance.onBeginPlay += spawntimer;
-        GameManager.instance.onBeginPlay += onDestroy();
-
+        MissionManager.instance.onStartMission += spawntimer;
+        time.SetActive(false);
     }
 
-    private Action onDestroy()
+    private void OnDestroy()
     {
-        throw new NotImplementedException();
+        MissionManager.instance.onStartMission -= spawntimer;
     }
 
     private void Update()
@@ -50,6 +50,7 @@ public class TimeController : MonoBehaviour
             {
                 Time.timeScale = 0;
                 over.SetActive(true);
+                time.SetActive(false);
             }
             int TempSec = Mathf.FloorToInt(restante % 60);
             tiempo.text = string.Format("{0}", TempSec);
