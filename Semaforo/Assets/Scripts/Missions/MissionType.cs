@@ -7,6 +7,6 @@ public enum MissionType
     CrossNormie,
     CrossKid,
     KillParaxodon,
-    CrossOld,
-    KillTank
+    KillTank,
+    CrossOld
 }

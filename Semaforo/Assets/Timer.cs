@@ -10,6 +10,7 @@ using System;
 public class TimeController : MonoBehaviour 
 {
     public GameObject over;
+    [SerializeField] private TMP_Text scoreText;
     public GameObject time;
     [SerializeField] int sec;
     [SerializeField] TextMeshProUGUI tiempo;
@@ -49,6 +50,7 @@ public class TimeController : MonoBehaviour
             if (restante < 1)
             {
                 Time.timeScale = 0;
+                scoreText.text = "SCORE: " + (MissionManager.instance.GetDifficulty-1);
                 over.SetActive(true);
                 time.SetActive(false);
             }

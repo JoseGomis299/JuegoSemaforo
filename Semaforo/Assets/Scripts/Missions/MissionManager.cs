@@ -12,6 +12,8 @@ public class MissionManager : MonoBehaviour
 
     [SerializeField] private int startingDifficulty;
     private int _difficulty;
+
+    public int GetDifficulty => _difficulty;
     
     private void Awake()
     {
