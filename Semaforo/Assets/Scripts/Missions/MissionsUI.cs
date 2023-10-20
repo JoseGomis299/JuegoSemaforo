@@ -53,11 +53,11 @@ public class MissionsUI : MonoBehaviour
     private string GetText(MissionObjective objective)
     { 
         string text = $"{objective.GetDoneQuantity()}/{objective.Needed} "; 
-        if (objective.Type == MissionType.CrossKid) text += "kids crossed the street"; 
-        if (objective.Type == MissionType.CrossNormie) text += "men crossed the street";
-        if (objective.Type == MissionType.CrossOld) text += "grannies crossed the street"; 
-        if (objective.Type == MissionType.KillParaxodon) text += "Paraxodons killed";
-        if (objective.Type == MissionType.KillTank) text += "tanks killed";
+        if (objective.Type == MissionType.CrossKid) text += "JSON crossed the street"; 
+        if (objective.Type == MissionType.CrossNormie) text += "JDAD crossed the street";
+        if (objective.Type == MissionType.CrossOld) text += "LOLA crossed the street"; 
+        if (objective.Type == MissionType.KillParaxodon) text += "PARAXODON killed";
+        if (objective.Type == MissionType.KillTank) text += "JUAN killed";
         if(objective.IsCompleted) text = $"<s>{text}</s>";
         return text;
     }
