@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     public static bool menuactive = true;
     public GameObject pausa;
     public GameObject misiones;
+    public GameObject charOverlay;
+    public GameObject greenLight;
+    public GameObject redLight;
 
     public static GameManager instance;
     public event Action onGameStart;
@@ -31,6 +34,9 @@ public class GameManager : MonoBehaviour
         menuactive = false;
         menu.SetActive(false);
         misiones.SetActive(true);
+        charOverlay.SetActive(true);
+        redLight.SetActive(false);
+        greenLight.SetActive(true);
         onGameStart?.Invoke();
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         if (onBeginPlay != null)

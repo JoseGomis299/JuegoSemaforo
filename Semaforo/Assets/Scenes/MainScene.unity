@@ -1379,7 +1379,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &898851939
 Transform:
   m_ObjectHideFlags: 0
@@ -1570,6 +1570,9 @@ MonoBehaviour:
   menu: {fileID: 1612459472}
   pausa: {fileID: 1397575532}
   misiones: {fileID: 1490601013}
+  charOverlay: {fileID: 1088258514}
+  greenLight: {fileID: 898851938}
+  redLight: {fileID: 2137510015}
 --- !u!1 &978004774
 GameObject:
   m_ObjectHideFlags: 0
@@ -1918,7 +1921,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1088258515
 Transform:
   m_ObjectHideFlags: 0
@@ -2793,6 +2796,7 @@ MonoBehaviour:
   tankSpawn: {fileID: 440470346}
   leftLimitSpawn: {fileID: 1625317493}
   rightLimitSpawn: {fileID: 766857730}
+  maxTanks: 3
   SpawnCountdown: 0.8
 --- !u!4 &1437582662
 Transform:

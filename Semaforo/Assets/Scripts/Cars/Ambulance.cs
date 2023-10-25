@@ -9,6 +9,15 @@ public class Ambulance : Car
    [Header("AI")]
    [SerializeField] private LayerMask streetLayer;
 
+   [SerializeField] private GameObject lights;
+   [SerializeField] private GameObject upLight;
+   [SerializeField] private GameObject downLight;
+
+   [SerializeField] private float lightBob = 0.08f;
+   [SerializeField] private float lightPulse = 0.5f;
+   private float lastPulse = 0f;
+   private float lastBob = 0f;
+
    private float rayDist;
    private Transform lastHit;
    
@@ -19,10 +28,14 @@ public class Ambulance : Car
       SetDirection();
       rayDist = 0.1f;
       lastDir = Vector3.up;
+      lastPulse = Time.time;
+      lastBob = Time.time;
    }
 
    protected override float GetSpeed()
    {
+      Lights();
+      
       if (isRush)
       {
          return 8f;
@@ -115,5 +128,24 @@ public class Ambulance : Car
       
       Gizmos.color = Color.red;
       Gizmos.DrawLine(center+ Vector3.up*(Bounds.size.y), center+ Vector3.down*(Bounds.size.y));
-   } 
+   }
+
+   void Lights()
+   {
+      if (Time.time - lastPulse >= lightPulse)
+      {
+         upLight.SetActive(!upLight.activeSelf);
+         downLight.SetActive(!downLight.activeSelf);
+
+         lastPulse = Time.time;
+      }
+
+      if (Time.time - lastBob >= lightBob)
+      {
+         float y = 1f/18f;
+         lights.transform.localPosition = new Vector3(0, y, 0) - lights.transform.localPosition;
+
+         lastBob = Time.time;
+      }
+   }
 }
