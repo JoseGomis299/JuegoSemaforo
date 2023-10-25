@@ -72,6 +72,8 @@ public class Move : MonoBehaviour
 
     void Die()
     {
+        if(dieSounds.Length > 0)
+            AudioManager.Instance.PlaySound(dieSounds[Random.Range(0, dieSounds.Length)]);
         ObjectPool.Instance.InstantiateFromPool(blood, transform.position, Quaternion.identity);
 
         // if(character == Characters.Tank) MissionManager.instance.DoObjective(MissionType.KillTank);
@@ -84,11 +86,5 @@ public class Move : MonoBehaviour
     {
         if(spawnSounds.Length > 0)
             AudioManager.Instance.PlaySound(spawnSounds[Random.Range(0, spawnSounds.Length)]);
-    }
-    
-    private void OnDisable()
-    {
-        if(dieSounds.Length > 0)
-            AudioManager.Instance.PlaySound(dieSounds[Random.Range(0, dieSounds.Length)]);
     }
 }
