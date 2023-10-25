@@ -17,18 +17,18 @@ public class PeopleSpawner : MonoBehaviour
     private Transform tankSpawn;
     [SerializeField] private Transform leftLimitSpawn;
     [SerializeField] private Transform rightLimitSpawn;
-    [SerializeField] private int maxTanks = 3;
 
     [SerializeField]
     private float SpawnCountdown = .5f;
-
+    
     private float lastSpawn;
     private float waitingTime;
-    private int spawnedTanks = 0;
 
     private Vector2 tankSpawnPos;
     private Vector2 leftLimitSpawnPos;
     private Vector2 rightLimitSpawnPos;
+
+    private GameManager manager;
     
     [Serializable]
     private struct PeopleInput
@@ -44,6 +44,8 @@ public class PeopleSpawner : MonoBehaviour
         rightLimitSpawnPos = rightLimitSpawn.position;
 
         lastSpawn = -SpawnCountdown;
+
+        manager = GameObject.Find("UI").GetComponent<GameManager>();
     }
     
     
@@ -69,7 +71,7 @@ public class PeopleSpawner : MonoBehaviour
 
             if (GameManager.menuactive && person.prefab.CompareTag("Tank")) continue;
 
-            if (spawnedTanks >= maxTanks && person.prefab.CompareTag("Tank")) continue;
+            if (manager.spawnedTanks >= manager.maxTanks && person.prefab.CompareTag("Tank")) continue;
             
             SpawnPerson(person.prefab);
             lastSpawn = Time.time;
@@ -79,7 +81,15 @@ public class PeopleSpawner : MonoBehaviour
 
     private void SpawnPerson(GameObject personPrefab)
     {
-        if (personPrefab.CompareTag("Tank")) spawnedTanks += 1;
+        if (personPrefab.CompareTag("Tank"))
+        {
+            manager.spawnedTanks += 1;
+
+            /*if (spawnedTanks >= maxTanks)
+            {
+                crossTanks.SetActive(true);
+            }*/
+        }
         
         ObjectPool.Instance.InstantiateFromPool(personPrefab, GetSpawnPos(personPrefab), quaternion.identity);
     }
