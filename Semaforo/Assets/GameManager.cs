@@ -18,9 +18,17 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
     public event Action onGameStart;
-    public event Action onBeginPlay;
 
-    public int spawnedTanks = 0;
+    private int _spawnedTanks;
+    public int SpawnedTanks
+    {
+        get => _spawnedTanks;
+        set
+        {
+            _spawnedTanks = value;
+            cross.SetActive(_spawnedTanks >= maxTanks);
+        }
+    }
     public int maxTanks = 3;
 
     private void Awake()
@@ -41,13 +49,8 @@ public class GameManager : MonoBehaviour
         charOverlay.SetActive(true);
         redLight.SetActive(false);
         greenLight.SetActive(true);
-        spawnedTanks = 0;
+        _spawnedTanks = 0;
         onGameStart?.Invoke();
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        if (onBeginPlay != null)
-        {
-            onBeginPlay.Invoke();
-        }
     }
     
     private void Start()
@@ -65,15 +68,6 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         Pausa();
-
-        if (spawnedTanks >= maxTanks)
-        {
-            cross.SetActive(true);
-        }
-        else
-        {
-            cross.SetActive(false);
-        }
     }
 
     public void Restart()

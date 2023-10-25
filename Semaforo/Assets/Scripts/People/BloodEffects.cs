@@ -10,52 +10,42 @@ public class BloodEffects : MonoBehaviour
 {
     [SerializeField] private Sprite[] bloodStains;
     [SerializeField] private GameObject bloodParticle;
-    [SerializeField] private GameObject bloodDeco;
 
-    private float waitingTime;
-    private float startEffectTime;
-
-    private SpriteRenderer sprite;
-    private BoxCollider2D collider;
-
-    private Vector2 spawnPos = Vector2.zero;
-
-    private void Start()
+    private SpriteRenderer _spriteRenderer;
+    private SpriteRenderer _childSpriteRenderer;
+    public void OnEnable()
     {
-        sprite = GetComponent<SpriteRenderer>();
-        collider = GetComponent<BoxCollider2D>();
-    }
-
-    public void SpawnDeathEffects(Vector2 pos)
-    {
-        spawnPos = pos;
-        
-        GameObject blood = ObjectPool.Instance.InstantiateFromPool(bloodParticle, new Vector3(spawnPos.x, spawnPos.y, 2), quaternion.identity);
-        waitingTime = blood.GetComponent<ParticleSystem>().totalTime;
-        startEffectTime = Time.time;
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _childSpriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        _spriteRenderer.enabled = false;
+        _childSpriteRenderer.enabled = false;
+        ObjectPool.Instance.InstantiateFromPool(bloodParticle, new Vector3(transform.position.x, transform.position.y, 2), quaternion.identity, true);
         StartCoroutine(SpawnBillboard());
     }
 
     private IEnumerator SpawnBillboard()
     {
-        yield return new WaitForSeconds(0.5f);
-
+        yield return new WaitForSeconds(0.4f);
+        
         float value = Random.Range(0, 3);
-
         Sprite spriteUse = value switch
         {
             > 2 => bloodStains[2],
             > 1 => bloodStains[1],
             _ => bloodStains[0]
         };
-        
-        GameObject bloodDecoObj = ObjectPool.Instance.InstantiateFromPool(bloodDeco, spawnPos, quaternion.identity);
-        bloodDecoObj.GetComponent<SpriteRenderer>().sprite = spriteUse;
-        bloodDecoObj.GetComponentInChildren<SpriteRenderer>().sprite = spriteUse;
-        
-        sprite.enabled = true;
-        collider.enabled = true;
-        gameObject.SetActive(false);
-        
+        _childSpriteRenderer.enabled = true;
+        _spriteRenderer.enabled = true;
+        _spriteRenderer.color = new Color(1, 1, 1,0);
+        _childSpriteRenderer.color = new Color(1, 1, 1,0);
+        _spriteRenderer.sprite = spriteUse;
+        _childSpriteRenderer.sprite = spriteUse;
+
+        for (float t = 1; t <= 10; t++)
+        {
+            yield return new WaitForSeconds(0.1f / 10);
+            _spriteRenderer.color = new Color(1, 1, 1,t/10f);
+            _childSpriteRenderer.color = new Color(1, 1, 1,t/10f);
+        }
     }
 }

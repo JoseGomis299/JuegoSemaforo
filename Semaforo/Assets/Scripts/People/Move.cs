@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ProjectUtils.ObjectPooling;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 enum Characters
 {
@@ -18,13 +20,15 @@ public class Move : MonoBehaviour
     [SerializeField] Characters character;
     [SerializeField] private float maxYPos = 5f;
 
+    [SerializeField] private AudioClip[] spawnSounds;
+    [SerializeField] private AudioClip[] dieSounds;
+
     private Animator anim;
-    private BloodEffects blood;
+    [SerializeField] private GameObject blood;
 
     private void Start()
     {
         anim = GetComponent<Animator>();
-        blood = GetComponent<BloodEffects>();
     }
 
     private void Update()
@@ -68,11 +72,23 @@ public class Move : MonoBehaviour
 
     void Die()
     {
-        blood.SpawnDeathEffects(transform.position);
-        gameObject.GetComponent<SpriteRenderer>().enabled = false;
-        gameObject.GetComponent<BoxCollider2D>().enabled = false;
-        
-        if(character == Characters.Tank) MissionManager.instance.DoObjective(MissionType.KillTank);
+        ObjectPool.Instance.InstantiateFromPool(blood, transform.position, Quaternion.identity);
+
+        // if(character == Characters.Tank) MissionManager.instance.DoObjective(MissionType.KillTank);
         if(character == Characters.Paraxodon) MissionManager.instance.DoObjective(MissionType.KillParaxodon);
+        
+        gameObject.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        if(spawnSounds.Length > 0)
+            AudioManager.Instance.PlaySound(spawnSounds[Random.Range(0, spawnSounds.Length)]);
+    }
+    
+    private void OnDisable()
+    {
+        if(dieSounds.Length > 0)
+            AudioManager.Instance.PlaySound(dieSounds[Random.Range(0, dieSounds.Length)]);
     }
 }

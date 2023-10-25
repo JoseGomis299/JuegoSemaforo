@@ -15,14 +15,13 @@ GameObject:
   - component: {fileID: 6722631777907093340}
   - component: {fileID: 3894919772650517446}
   - component: {fileID: -3971153973425864189}
-  - component: {fileID: 8609336196158003697}
   m_Layer: 0
   m_Name: "Parax\xF4d\xF2n"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3313789965925489796
 Transform:
   m_ObjectHideFlags: 0
@@ -212,21 +211,17 @@ MonoBehaviour:
   speed: 6
   character: 3
   maxYPos: 5
---- !u!114 &8609336196158003697
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4522010327531072498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8313d5493f7dfa144b4859625e7fa875, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bloodStains:
-  - {fileID: 21300000, guid: 307fa290d9a09484baf290d891780b21, type: 3}
-  - {fileID: 21300000, guid: 356c87687ed494e4a894fda7abc49d10, type: 3}
-  - {fileID: 21300000, guid: 07dc25d4bfd857741bed1eeafbcacdb2, type: 3}
-  bloodParticle: {fileID: 945911069789517380, guid: 77b0c4daf2d22f840bffcf2c6a978317, type: 3}
-  bloodDeco: {fileID: 6868263528341148689, guid: eeef271a1b1309349a713ab0bfbc08b8, type: 3}
+  spawnSounds:
+  - {fileID: 8300000, guid: 6872ebdeb28a99a428bfacbf053742d8, type: 3}
+  - {fileID: 8300000, guid: 1d8b8b88bb2f22443a5bb6d26b4ee44a, type: 3}
+  - {fileID: 8300000, guid: 8d209ddf8794fd74ca9488df17a6f1fe, type: 3}
+  - {fileID: 8300000, guid: 500aeee8444e81f4dbe8b029fa2e8c49, type: 3}
+  - {fileID: 8300000, guid: e71522f2161d6aa449be8edbbe7c5c6a, type: 3}
+  dieSounds:
+  - {fileID: 8300000, guid: 3c522b35c7a142342b12a125980b63b9, type: 3}
+  - {fileID: 8300000, guid: 6830501514c36854caeb8e6096342e9f, type: 3}
+  - {fileID: 8300000, guid: 86aadf09a6981ae4da1ed385e79afda2, type: 3}
+  - {fileID: 8300000, guid: c832b99325484564b963c98358bf9cde, type: 3}
+  - {fileID: 8300000, guid: 348a1d39d5f946d4ca19a4923169a054, type: 3}
+  - {fileID: 8300000, guid: 0b8104d3522b3d84db38005364f29b93, type: 3}
+  blood: {fileID: 6868263528341148689, guid: eeef271a1b1309349a713ab0bfbc08b8, type: 3}

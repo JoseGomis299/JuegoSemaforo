@@ -50,7 +50,7 @@ public class Mission
         float value = 1;
         float last = 0.5f;
         
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 4; i++)
         {
             value -= last;
             if (n >= value) return (MissionType) i;

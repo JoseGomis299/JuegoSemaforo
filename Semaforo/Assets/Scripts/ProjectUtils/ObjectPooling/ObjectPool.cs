@@ -36,6 +36,7 @@ namespace ProjectUtils.ObjectPooling
             {
                 for (int j = 0; j < initialObjectPool[i].quantity; j++)
                 {
+                    initialObjectPool[i].gameObject.SetActive(false);
                     var temp = Instantiate(initialObjectPool[i].gameObject, _objectPoolParent.transform);
                     _objectPool.Add(new PoolObject
                     {
@@ -43,7 +44,6 @@ namespace ProjectUtils.ObjectPooling
                         quantity = 1,
                         lifeTime = initialObjectPool[i].lifeTime 
                     });
-                    temp.SetActive(false);
                 }
             }
         }

@@ -28,8 +28,6 @@ public class PeopleSpawner : MonoBehaviour
     private Vector2 leftLimitSpawnPos;
     private Vector2 rightLimitSpawnPos;
 
-    private GameManager manager;
-    
     [Serializable]
     private struct PeopleInput
     {
@@ -44,8 +42,6 @@ public class PeopleSpawner : MonoBehaviour
         rightLimitSpawnPos = rightLimitSpawn.position;
 
         lastSpawn = -SpawnCountdown;
-
-        manager = GameObject.Find("UI").GetComponent<GameManager>();
     }
     
     
@@ -71,7 +67,7 @@ public class PeopleSpawner : MonoBehaviour
 
             if (GameManager.menuactive && person.prefab.CompareTag("Tank")) continue;
 
-            if (manager.spawnedTanks >= manager.maxTanks && person.prefab.CompareTag("Tank")) continue;
+            if (GameManager.instance.SpawnedTanks >= GameManager.instance.maxTanks && person.prefab.CompareTag("Tank")) continue;
             
             SpawnPerson(person.prefab);
             lastSpawn = Time.time;
@@ -83,7 +79,7 @@ public class PeopleSpawner : MonoBehaviour
     {
         if (personPrefab.CompareTag("Tank"))
         {
-            manager.spawnedTanks += 1;
+            GameManager.instance.SpawnedTanks += 1;
 
             /*if (spawnedTanks >= maxTanks)
             {

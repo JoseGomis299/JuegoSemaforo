@@ -15,14 +15,13 @@ GameObject:
   - component: {fileID: -4029386853519514082}
   - component: {fileID: 1692466949868286800}
   - component: {fileID: -7552961367853921950}
-  - component: {fileID: 1268580551107411815}
   m_Layer: 0
   m_Name: Granny
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6359585977056595646
 Transform:
   m_ObjectHideFlags: 0
@@ -212,21 +211,6 @@ MonoBehaviour:
   speed: 0.75
   character: 2
   maxYPos: 5
---- !u!114 &1268580551107411815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9188214804749148289}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8313d5493f7dfa144b4859625e7fa875, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bloodStains:
-  - {fileID: 21300000, guid: 307fa290d9a09484baf290d891780b21, type: 3}
-  - {fileID: 21300000, guid: 356c87687ed494e4a894fda7abc49d10, type: 3}
-  - {fileID: 21300000, guid: 07dc25d4bfd857741bed1eeafbcacdb2, type: 3}
-  bloodParticle: {fileID: 945911069789517380, guid: 77b0c4daf2d22f840bffcf2c6a978317, type: 3}
-  bloodDeco: {fileID: 6868263528341148689, guid: eeef271a1b1309349a713ab0bfbc08b8, type: 3}
+  spawnSounds: []
+  dieSounds: []
+  blood: {fileID: 6868263528341148689, guid: eeef271a1b1309349a713ab0bfbc08b8, type: 3}

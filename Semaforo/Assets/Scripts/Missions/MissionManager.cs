@@ -61,6 +61,7 @@ public class MissionManager : MonoBehaviour
     private void StartMission(Mission mission)
     {
         onStartMission?.Invoke(mission);
+        GameManager.instance.SpawnedTanks = 0;
     }
     
     public void DoObjective(MissionType type)
