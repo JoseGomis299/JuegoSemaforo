@@ -20,6 +20,7 @@ public class Car : MonoBehaviour
     [Header("Sounds")] 
     [SerializeField] protected AudioClip movingSound;
     [SerializeField] protected AudioClip crashSound;
+    [Range(0, 1)] protected float loudness = 0;
 
     public bool isRush = false;
 
@@ -71,12 +72,31 @@ public class Car : MonoBehaviour
     {
         Bounds = GetComponent<SpriteRenderer>().bounds;
         minDistance += Bounds.extents.x;
+
+        if (GetComponent<AudioSource>() != null)
+        {
+            GetComponent<AudioSource>().volume = 0;
+        }
     }
     
     protected void Update()
     {
         center = transform.position + Vector3.up * Bounds.extents.y;
         Move();
+        if (GetComponents<AudioSource>() != null)
+        {
+            foreach(AudioSource AS in GetComponents<AudioSource>())
+            {
+                if (AS.clip.name == "Motor")
+                {
+                    AS.volume = Mathf.Clamp(1f - Mathf.Abs(transform.position.x / 8f), 0, 1f);
+                }
+                else
+                {
+                    AS.volume = Mathf.Clamp(1f - Mathf.Abs(transform.position.x / 8f), 0, 0.5f);
+                }
+            }
+        }
     }
 
     protected void OnTriggerEnter2D(Collider2D col)

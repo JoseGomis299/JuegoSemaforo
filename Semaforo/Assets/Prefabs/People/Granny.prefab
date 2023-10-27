@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9188214804749148289}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.39963436, y: -1.1702445, z: -9.296609}
+  m_LocalPosition: {x: 4.5724525, y: -6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -211,6 +211,9 @@ MonoBehaviour:
   speed: 0.75
   character: 2
   maxYPos: 5
-  spawnSounds: []
-  dieSounds: []
+  spawnSounds:
+  - {fileID: 8300000, guid: 9bfec682e2ebb444fbd40a9e0dca14ac, type: 3}
+  dieSounds:
+  - {fileID: 8300000, guid: 48e9d8ffdd9ffd8469fba93616ce7116, type: 3}
+  - {fileID: 8300000, guid: e2249124843fc83468444bb0113cf9f5, type: 3}
   blood: {fileID: 6868263528341148689, guid: eeef271a1b1309349a713ab0bfbc08b8, type: 3}

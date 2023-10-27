@@ -211,6 +211,9 @@ MonoBehaviour:
   speed: 3
   character: 1
   maxYPos: 5
-  spawnSounds: []
-  dieSounds: []
+  spawnSounds:
+  - {fileID: 8300000, guid: 9bfec682e2ebb444fbd40a9e0dca14ac, type: 3}
+  dieSounds:
+  - {fileID: 8300000, guid: ef512fa4c09c658449a9ece29187c28f, type: 3}
+  - {fileID: 8300000, guid: 32b12f0d2f8cbf148986e1a51ee22683, type: 3}
   blood: {fileID: 6868263528341148689, guid: eeef271a1b1309349a713ab0bfbc08b8, type: 3}

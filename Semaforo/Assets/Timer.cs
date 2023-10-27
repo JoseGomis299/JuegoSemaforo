@@ -11,6 +11,8 @@ public class TimeController : MonoBehaviour
 {
     public GameObject over;
     [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private TMP_Text hiScoreText;
+    static int highScore = 0;
     public GameObject time;
     [SerializeField] int sec;
     [SerializeField] TextMeshProUGUI tiempo;
@@ -51,6 +53,11 @@ public class TimeController : MonoBehaviour
             {
                 Time.timeScale = 0;
                 scoreText.text = "SCORE: " + (MissionManager.instance.GetDifficulty-1);
+                if (MissionManager.instance.GetDifficulty - 1 > highScore)
+                {
+                    highScore = MissionManager.instance.GetDifficulty - 1;
+                }
+                hiScoreText.text = "HIGH SCORE: " + highScore;
                 over.SetActive(true);
                 time.SetActive(false);
             }
